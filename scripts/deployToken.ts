@@ -4,18 +4,17 @@ async function main() {
 
 
 // Assuming 'amount' is the number you want to pass as a BigNumber
-  const amount = 1; 
-  
-  const marsAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-  const plutoAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+  const token = 1000000
 
-  const lawswap = await ethers.deployContract("LAWswap", [marsAddress, plutoAddress, amount]);
+    // const MarsToken = await ethers.deployContract("MARS", [token]);
+    
+    const PlutoToken = await ethers.deployContract("PLUTO",[token]);
 
 
-  await lawswap.waitForDeployment();
+  await PlutoToken.waitForDeployment();
 
   console.log(
-    `LAWswap deployed to ${lawswap.target}`
+    `PLUTO deployed to ${PlutoToken.target}`
   );
 }
 
