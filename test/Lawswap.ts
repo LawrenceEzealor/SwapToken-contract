@@ -54,15 +54,22 @@ describe("SWAP TOKEN test", function () {
       expect(bal).to.be.eq(900);
     });
   })
-  
 
-  // describe("SwapMarsToPluto", function () {
-  //   it("should not send to address zero", async function () {
-  //     const { lawswap, pluto, mars, owner, user1 } = await loadFixture(deployLAWswap);
-  //     const zeroAddress = ethers.ZeroAddress;
-  //     const amount = ethers.getSigners();
-  //     expect(amount).to.not.equal(zeroAddress);
-  //   })
-  // })
+  describe("test swap", function () {
+    it("pluto should be able to swap to mars", async ()=> {
+      const { owner, lawswap, mars, pluto } = await loadFixture(deployLAWswap);
+      pluto.transfer(lawswap.target, 200);
+      mars.transfer(lawswap.target, 200);
+      console.log(await pluto.balanceOf(lawswap.target));
+      console.log(await mars.balanceOf(lawswap.target));
+      await pluto.approve(lawswap.target, 100);
+
+      await lawswap.swapPlutoToMars(20);
+
+      const bal = await mars.balanceOf(owner.address);
+
+      expect(bal).to.equal(810);
+    })
+  })
 
 });

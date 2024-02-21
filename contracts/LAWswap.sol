@@ -39,7 +39,6 @@ contract LAWswap {
             IERC20(pluto).balanceOf(address(this)) >= _plutoEquivalent,
             "unable to dispense cash"
         );
-
         
         require(
             IERC20(mars).transferFrom(msg.sender, address(this), _amount),
@@ -64,6 +63,7 @@ contract LAWswap {
         );
 
         //calculate the xchange rate
+        //
         uint _marsEquivalent = _amount / xchangeRate;
 
         require(
